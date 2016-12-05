@@ -1,0 +1,25 @@
+﻿<Window x:Class="NetworkClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:networking="clr-namespace:NetworkClient.Networking"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance networking:NetworkConnectionViewModel}"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Grid.Row="0">Message:</Label>
+        <TextBox Grid.Column="1" Grid.Row="0" Name="UserMessage" />
+        <TextBlock Text="{Binding LastResponse}" Grid.Column="0" Grid.Row="1" />
+        <Button Grid.Column="1" Grid.Row="2" Click="OnClick_SendMessage">Send</Button>
+    </Grid>
+</Window>
