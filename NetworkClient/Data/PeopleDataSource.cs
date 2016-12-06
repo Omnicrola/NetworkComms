@@ -11,7 +11,7 @@ namespace NetworkClient.Data
         private readonly PeopleNetworkMessenger _peopleNetworkMessenger;
         private List<NetworkedPerson> _writeablePeople;
         private ObservableCollection<IPerson> _people;
-        public override ReadOnlyObservableCollection<IPerson> Data { get; }
+        public override DataCollection<IPerson> Data { get; }
 
 
         public PeopleDataSource(PeopleNetworkMessenger peopleNetworkMessenger)
@@ -19,7 +19,7 @@ namespace NetworkClient.Data
             _peopleNetworkMessenger = peopleNetworkMessenger;
             _writeablePeople = new List<NetworkedPerson>();
             _people = new ObservableCollection<IPerson>();
-            Data = new ReadOnlyObservableCollection<IPerson>(_people);
+            Data = new DataCollection<IPerson>(_people);
 
             _peopleNetworkMessenger.DataReceived += UpdateData;
         }
@@ -30,7 +30,12 @@ namespace NetworkClient.Data
             var foundPerson = _writeablePeople.FirstOrDefault(p => p.Id == updatedPerson.Id);
             if (foundPerson == null)
             {
-                var newPerson = new NetworkedPerson(updatedPerson.Id, updatedPerson.FirstName, updatedPerson.LastName);
+                var newPerson = new NetworkedPerson(_peopleNetworkMessenger)
+                {
+                    Id = updatedPerson.Id,
+                    FirstName = updatedPerson.FirstName,
+                    LastName = updatedPerson.LastName
+                };
                 _writeablePeople.Add(newPerson);
                 _people.Add(newPerson);
             }
@@ -43,7 +48,7 @@ namespace NetworkClient.Data
 
         public override IPerson Create()
         {
-            return new NetworkedPerson(-1, "", "");
+            return new NetworkedPerson(_peopleNetworkMessenger) { Id = -1 };
         }
     }
 }

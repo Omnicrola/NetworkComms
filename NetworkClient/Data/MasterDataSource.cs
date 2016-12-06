@@ -1,4 +1,5 @@
-﻿using NetworkLibrary.DataTransferObjects;
+﻿using NetworkClient.Networking;
+using NetworkLibrary.DataTransferObjects;
 
 namespace NetworkClient.Data
 {
@@ -20,7 +21,10 @@ namespace NetworkClient.Data
 
         private MasterDataSource()
         {
-            PeopleDataSource = new PeopleDataSource();
+            var networkConfiguration = new NetworkConfiguration();
+            var uiDispatcher = new UiDispatcher();
+            var peopleNetworkMessenger = new PeopleNetworkMessenger(networkConfiguration, uiDispatcher);
+            PeopleDataSource = new PeopleDataSource(peopleNetworkMessenger);
         }
     }
 }
