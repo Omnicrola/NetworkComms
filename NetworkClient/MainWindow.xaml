@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:networking="clr-namespace:NetworkClient.Networking"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance networking:NetworkConnectionViewModel}"
-        Title="MainWindow" Height="350" Width="525">
+        d:DataContext="{d:DesignInstance networking:PeopleViewModel}"
+        Title="Client" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="Auto" />
@@ -16,10 +17,30 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Grid.Row="0">Message:</Label>
-        <TextBox Grid.Column="1" Grid.Row="0" Name="UserMessage" />
-        <TextBlock Text="{Binding LastResponse}" Grid.Column="0" Grid.Row="1" />
-        <Button Grid.Column="1" Grid.Row="2" Click="OnClick_SendMessage">Send</Button>
+
+        <ItemsControl Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="5" ItemsSource="{Binding People}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding FirstName}"/>
+                        <Run Text=" "/>
+                        <Run Text="{Binding LastName}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <Label Grid.Column="1" Grid.Row="0" Margin="10">First Name:</Label>
+        <TextBox Grid.Column="2" Grid.Row="0" Margin="10" Name="FirstName" />
+        <Label Grid.Column="1" Grid.Row="1" Margin="10">Last Name:</Label>
+        <TextBox Grid.Column="2" Grid.Row="1" Margin="10" Name="LastName" />
+
+        <Border Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="2" Margin="5">
+            <TextBlock Text="{Binding LastResponse}" />
+        </Border>
+
+        <Button Grid.Column="2" Grid.Row="3" Margin="10" Click="OnClick_AddPerson">Send</Button>
     </Grid>
 </Window>

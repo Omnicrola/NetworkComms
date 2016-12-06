@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using NetworkClient.Networking;
+using NetworkLibrary.DataTransferObjects;
 using NetworkLibrary.NetworkMessages;
 
 namespace NetworkClient
@@ -9,21 +10,18 @@ namespace NetworkClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        private NetworkConnectionViewModel _networkConnectionViewModel;
-        private NetworkManager _networkManager;
+        private readonly PeopleViewModel _peopleViewModel;
 
         public MainWindow()
         {
             InitializeComponent();
-            _networkManager = new NetworkManager();
-            _networkConnectionViewModel = new NetworkConnectionViewModel(new NetworkConnectionModel());
-            this.DataContext = _networkConnectionViewModel;
+            _peopleViewModel = new PeopleViewModel();
+            this.DataContext = _peopleViewModel;
         }
 
-        private void OnClick_SendMessage(object sender, RoutedEventArgs e)
+        private void OnClick_AddPerson(object sender, RoutedEventArgs e)
         {
-            this._networkConnectionViewModel.LastResponse =
-                _networkManager.SendMessage(UserMessage.Text);
+            _peopleViewModel.AddPerson(new PersonDto { FirstName = FirstName.Text, LastName = LastName.Text });
         }
     }
 }

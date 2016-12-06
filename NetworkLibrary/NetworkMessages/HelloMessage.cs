@@ -6,7 +6,7 @@ namespace NetworkLibrary.NetworkMessages
     public class HelloMessage : INetworkMessage
     {
         [ProtoMember(1)]
-        public string Message { get; }
+        public string Message { get; set; }
 
 
         protected HelloMessage() { }

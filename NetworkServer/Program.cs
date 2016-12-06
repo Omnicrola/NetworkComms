@@ -4,6 +4,7 @@ using System.Threading;
 using NetworkCommsDotNet;
 using NetworkCommsDotNet.Connections;
 using NetworkLibrary.NetworkMessages;
+using NetworkServer.Networking;
 
 namespace NetworkServer
 {
@@ -13,9 +14,14 @@ namespace NetworkServer
 
         static void Main(string[] args)
         {
+            var messageHandler = new MessageHandler();
             //Trigger the method PrintIncomingMessage when a packet of type 'Message' is received
             //We expect the incoming object to be a string which we state explicitly by using <string>
-            NetworkComms.AppendGlobalIncomingPacketHandler<string>("Message", PrintIncomingMessage);
+            NetworkComms.AppendGlobalIncomingPacketHandler<HelloMessage>(typeof(HelloMessage).Name, PrintIncomingMessage);
+            NetworkComms.AppendGlobalIncomingUnmanagedPacketHandler(HandleUnmanaged);
+            //            NetworkComms.EnableLogging();
+            messageHandler.Load();
+
             //Start listening for incoming connections
             var desiredLocalEndPoint = new System.Net.IPEndPoint(System.Net.IPAddress.Any, SERVER_PORT);
             Connection.StartListening(ConnectionType.TCP, desiredLocalEndPoint);
@@ -36,17 +42,31 @@ namespace NetworkServer
             NetworkComms.Shutdown();
         }
 
-        /// <summary>
-        /// Writes the provided message to the console window
-        /// </summary>
-        /// <param name="header">The packet header associated with the incoming message</param>
-        /// <param name="connection">The connection used by the incoming message</param>
-        /// <param name="message">The message to be printed to the console</param>
-        private static void PrintIncomingMessage(PacketHeader header, Connection connection, string message)
+        private static void HandleUnmanaged(PacketHeader packetheader, Connection connection, byte[] incomingobject)
         {
-            Console.WriteLine("\nA message was received from " + connection.ToString() + " which said '" +
-                              message +
-                              "'.");
+            try
+            {
+                var data = System.Text.Encoding.UTF8.GetString(incomingobject);
+                Console.WriteLine("Unmanaged message recieved: " + data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("EXCEPTION : " + e.GetType() + " " + e.Message);
+            }
+        }
+
+        private static void PrintIncomingMessage(PacketHeader header, Connection connection, HelloMessage message)
+        {
+            try
+            {
+                Console.WriteLine("\nA HelloMessage was received from " + connection.ToString() + " which said '" +
+                                  message.Message +
+                                  "'.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("EXCEPTION : " + e.GetType() + " " + e.Message);
+            }
         }
     }
 }
