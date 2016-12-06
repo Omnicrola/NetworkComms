@@ -13,14 +13,15 @@ namespace NetworkClient.Networking
 {
     public class NetworkManager
     {
+        private readonly UiDispatcher _uiDispatcher;
         private readonly string _ipAddress;
         private readonly int _serverPort;
-        private Dispatcher UiDispatcher => Application.Current.Dispatcher;
 
         public EventHandler<PersonAddedEvent> PersonAdded;
 
-        public NetworkManager()
+        public NetworkManager(UiDispatcher uiDispatcher)
         {
+            _uiDispatcher = uiDispatcher;
             //            _ipAddress = ConfigurationManager.AppSettings["SERVER_IP"];
             //            _serverPort = Convert.ToInt32(ConfigurationManager.AppSettings["SERVER_PORT"]);
 
@@ -34,12 +35,7 @@ namespace NetworkClient.Networking
         private void Network_PersonAdded(PacketHeader packetheader, Connection connection,
             StorePersonMessage incomingobject)
         {
-            Console.WriteLine("Recieved on thread:" + Thread.CurrentThread.Name);
-            UiDispatcher.BeginInvoke(new Action(() =>
-            {
-                Console.WriteLine("Dispatched to thread:" + Thread.CurrentThread.Name);
-                PersonAdded?.Invoke(this, new PersonAddedEvent(incomingobject.Person));
-            }));
+            _uiDispatcher.Dispatch(() => PersonAdded?.Invoke(this, new PersonAddedEvent(incomingobject.Person)));
         }
 
         public string SendMessage(object message)

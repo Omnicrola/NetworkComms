@@ -59,6 +59,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\DataSource.cs" />
+    <Compile Include="Data\IPerson.cs" />
+    <Compile Include="Data\IPersonWriteable.cs" />
+    <Compile Include="Data\MasterDataSource.cs" />
+    <Compile Include="Networking\MessageReceivedEventArgs.cs" />
+    <Compile Include="Networking\NetworkConfiguration.cs" />
+    <Compile Include="Data\PeopleDataSource.cs" />
+    <Compile Include="Data\NetworkedPerson.cs" />
+    <Compile Include="Networking\INetworkMessenger.cs" />
+    <Compile Include="Networking\PeopleNetworkMessenger.cs" />
+    <Compile Include="UiDispatcher.cs" />
+    <Compile Include="Ui\PersonViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,7 +85,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Networking\NetworkConnectionModel.cs" />
     <Compile Include="Networking\PeopleViewModel.cs" />
     <Compile Include="Networking\NetworkManager.cs" />
     <Compile Include="Properties\Annotations.cs" />
