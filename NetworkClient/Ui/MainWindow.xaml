@@ -17,8 +17,7 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <ui:SelectedUserPanel SelectedPerson="{Binding SelectedPerson}"/>
-        <ui:PeopleTable Grid.Row="1" SelectedPerson="{Binding SelectedPerson}"  People="{Binding People}"/>
-
+        <ui:SelectedUserPanel SelectedPerson="{Binding CurrentlySelectedPerson}"/>
+        <ui:PeopleTable Grid.Row="1" PeopleSource="{Binding People}" SelectedPerson="{Binding CurrentlySelectedPerson}"/>
     </Grid>
 </Window>

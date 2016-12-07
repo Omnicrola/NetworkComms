@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="DataTransferObjects\PersonDto.cs" />
     <Compile Include="NetworkMessages\AllPeopleMessage.cs" />
-    <Compile Include="NetworkMessages\GetAllPeopleMessage.cs" />
     <Compile Include="NetworkMessages\HelloMessage.cs" />
     <Compile Include="NetworkMessages\INetworkMessage.cs" />
     <Compile Include="NetworkMessages\StorePersonMessage.cs" />

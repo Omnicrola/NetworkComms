@@ -12,20 +12,21 @@ namespace NetworkServer.Networking
     {
         private DataStorage _dataStorage;
 
-        public MessageHandler()
+        public MessageHandler(DataStorage dataStorage)
         {
-            _dataStorage = new DataStorage();
+            _dataStorage = dataStorage;
         }
 
         public void Load()
         {
             NetworkComms.AppendGlobalIncomingPacketHandler<StorePersonMessage>(typeof(StorePersonMessage).Name, Handle_StorePerson);
-            NetworkComms.AppendGlobalIncomingPacketHandler<GetAllPeopleMessage>(typeof(GetAllPeopleMessage).Name, Handle_GetAllPeople);
+            NetworkComms.AppendGlobalIncomingPacketHandler<AllPeopleMessage>(typeof(AllPeopleMessage).Name, Handle_GetAllPeople);
         }
 
         private void Handle_GetAllPeople(PacketHeader packetheader, Connection connection,
-            GetAllPeopleMessage incomingobject)
+            AllPeopleMessage incomingobject)
         {
+            Console.WriteLine("Received AllPeopleMessage");
             connection.SendObject(typeof(AllPeopleMessage).Name, new AllPeopleMessage(_dataStorage.GetAllPeople().ToList()));
         }
 
@@ -34,6 +35,7 @@ namespace NetworkServer.Networking
         {
             try
             {
+                Console.WriteLine("Receieved StorePersonMessage");
                 _dataStorage.Save(incomingobject.Person);
                 Broadcast(new StorePersonMessage(incomingobject.Person));
             }

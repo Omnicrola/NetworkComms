@@ -10,6 +10,7 @@ namespace NetworkLibrary.NetworkMessages
         [ProtoMember(1)]
         public List<PersonDto> People { get; set; }
 
+        public AllPeopleMessage() { }
         public AllPeopleMessage(List<PersonDto> people)
         {
             People = people;

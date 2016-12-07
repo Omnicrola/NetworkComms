@@ -19,11 +19,28 @@ namespace NetworkClient.Networking
             _uiDispatcher = uiDispatcher;
             NetworkComms.AppendGlobalIncomingPacketHandler<StorePersonMessage>(typeof(StorePersonMessage).Name,
                 IncomingMessageHandler);
+            NetworkComms.AppendGlobalIncomingPacketHandler<AllPeopleMessage>(typeof(AllPeopleMessage).Name,
+                HandleAllPeople);
+            _networkConfiguration.SendObject(new AllPeopleMessage());
+        }
+
+        private void HandleAllPeople(PacketHeader packetheader, Connection connection, AllPeopleMessage incomingobject)
+        {
+            Console.WriteLine("Message recieved: AllPeopleMessage");
+            _uiDispatcher.Dispatch(() =>
+            {
+                foreach (PersonDto personDto in incomingobject.People)
+                {
+                    var messageReceivedEventArgs = new MessageReceivedEventArgs<PersonDto>(personDto);
+                    DataReceived?.Invoke(this, messageReceivedEventArgs);
+                }
+            });
         }
 
         private void IncomingMessageHandler(PacketHeader packetheader, Connection connection,
             StorePersonMessage incomingobject)
         {
+            Console.WriteLine("Message recieved: StorePerson");
             _uiDispatcher.Dispatch(
                 () =>
                 {

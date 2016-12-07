@@ -9,7 +9,7 @@ namespace NetworkClient.Data
     public class PeopleDataSource : DataSource<IPerson>
     {
         private readonly PeopleNetworkMessenger _peopleNetworkMessenger;
-        private List<NetworkedPerson> _writeablePeople;
+        private readonly List<NetworkedPerson> _writeablePeople;
         private ObservableCollection<IPerson> _people;
         public override DataCollection<IPerson> Data { get; }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace NetworkClient.Ui
     public class MainWindowViewModel
     {
         public ObservableCollection<PersonViewModel> People { get; set; }
-        public PersonViewModel SelectedPerson { get; set; }
+        public PersonViewModel CurrentlySelectedPerson { get; set; }
 
         public MainWindowViewModel()
         {

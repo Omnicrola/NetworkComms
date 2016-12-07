@@ -10,9 +10,10 @@ namespace NetworkServer.Networking
     {
         private readonly List<PersonDto> People = new List<PersonDto>();
 
+
         public void Save(PersonDto person)
         {
-            Console.WriteLine("Storing: " + person);
+            Console.WriteLine("Storing: " + person.FirstName + " " + person.LastName);
             var match = People.FirstOrDefault(p => p.Id == person.Id);
             if (match == null)
             {

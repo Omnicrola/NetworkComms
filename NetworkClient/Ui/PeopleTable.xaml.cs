@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,9 @@ namespace NetworkClient.Ui
     /// </summary>
     public partial class PeopleTable : UserControl
     {
-        public static readonly DependencyProperty PeopleProperty = DependencyProperty.Register("People",
-            typeof(List<IPerson>), typeof(PeopleTable), new PropertyMetadata(default(List<IPerson>)));
+        public static readonly DependencyProperty PeopleSourceProperty = DependencyProperty.Register("PeopleSource",
+            typeof(ObservableCollection<PersonViewModel>), typeof(PeopleTable),
+            new PropertyMetadata(default(ObservableCollection<PersonViewModel>)));
 
         public static readonly DependencyProperty SelectedPersonProperty = DependencyProperty.Register(
             "SelectedPerson", typeof(PersonViewModel), typeof(PeopleTable),
@@ -34,10 +36,10 @@ namespace NetworkClient.Ui
             RootElement.DataContext = this;
         }
 
-        public List<IPerson> People
+        public ObservableCollection<PersonViewModel> PeopleSource
         {
-            get { return (List<IPerson>)GetValue(PeopleProperty); }
-            set { SetValue(PeopleProperty, value); }
+            get { return (ObservableCollection<PersonViewModel>)GetValue(PeopleSourceProperty); }
+            set { SetValue(PeopleSourceProperty, value); }
         }
 
         public PersonViewModel SelectedPerson

@@ -8,6 +8,6 @@
              d:DataContext="{d:DesignInstance local:PeopleTable}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Name="RootElement">
-        <DataGrid ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson}"/>
+        <DataGrid ItemsSource="{Binding PeopleSource}" SelectedItem="{Binding SelectedPerson}"/>
     </Grid>
 </UserControl>

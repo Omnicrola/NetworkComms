@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading;
 using NetworkCommsDotNet;
 using NetworkCommsDotNet.Connections;
+using NetworkLibrary.DataTransferObjects;
 using NetworkLibrary.NetworkMessages;
 using NetworkServer.Networking;
 
@@ -14,7 +15,13 @@ namespace NetworkServer
 
         static void Main(string[] args)
         {
-            var messageHandler = new MessageHandler();
+            var dataStorage = new DataStorage();
+            dataStorage.Save(new PersonDto { Id = 1, FirstName = "John", LastName = "Doe" });
+            dataStorage.Save(new PersonDto { Id = 2, FirstName = "Bob", LastName = "Vila" });
+            dataStorage.Save(new PersonDto { Id = 3, FirstName = "John", LastName = "Dillinger" });
+            var messageHandler = new MessageHandler(dataStorage);
+
+
             //Trigger the method PrintIncomingMessage when a packet of type 'Message' is received
             //We expect the incoming object to be a string which we state explicitly by using <string>
             NetworkComms.AppendGlobalIncomingPacketHandler<HelloMessage>(typeof(HelloMessage).Name, PrintIncomingMessage);
