@@ -83,6 +83,9 @@
     <Compile Include="Ui\SelectedUserPanel.xaml.cs">
       <DependentUpon>SelectedUserPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ui\TabWindow.xaml.cs">
+      <DependentUpon>TabWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Ui\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\SelectedUserPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ui\TabWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,11 +10,13 @@ namespace NetworkClient.Ui
     {
         public ObservableCollection<PersonViewModel> People { get; set; }
         public PersonViewModel CurrentlySelectedPerson { get; set; }
+        public SimpleInterTabClient InterTabClient { get; set; }
 
         public MainWindowViewModel()
         {
             People = new ObservableCollection<PersonViewModel>();
             MasterDataSource.Instance().PeopleDataSource.Data.DataChanged += HandlePeopleChanged;
+            InterTabClient = new SimpleInterTabClient();
         }
 
         private void HandlePeopleChanged(object sender, NotifyCollectionChangedEventArgs e)
