@@ -6,19 +6,19 @@
              xmlns:local="clr-namespace:NetworkClient.Ui"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance local:SelectedUserPanel}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="400">
     <Grid Name="RootElement">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Margin="5">First Name:</Label>
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="5">First Name:</TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding SelectedPerson.FirstName}"/>
-        <Label Grid.Row="1" Grid.Column="0" Margin="5">Last Name:</Label>
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="5">Last Name:</TextBlock>
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding SelectedPerson.LastName}"/>
     </Grid>
 </UserControl>
