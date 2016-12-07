@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using NetworkClient.Annotations;
@@ -12,6 +13,8 @@ namespace NetworkClient.Data
         private int _id;
         private string _firstName;
         private string _lastName;
+        private string _gender;
+        private DateTime _birthday;
 
         public int Id
         {
@@ -46,6 +49,28 @@ namespace NetworkClient.Data
             }
         }
 
+        public string Gender
+        {
+            get { return _gender; }
+            set
+            {
+                if (value == _gender) return;
+                _gender = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime Birthday
+        {
+            get { return _birthday; }
+            set
+            {
+                if (value.Equals(_birthday)) return;
+                _birthday = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public NetworkedPerson(PeopleNetworkMessenger networkMessenger)
         {
@@ -59,7 +84,9 @@ namespace NetworkClient.Data
             {
                 Id = Id,
                 FirstName = FirstName,
-                LastName = LastName
+                LastName = LastName,
+                Gender = Gender,
+                Birthday = Birthday
             });
         }
 

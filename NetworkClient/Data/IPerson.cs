@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace NetworkClient.Data
 {
@@ -7,6 +8,8 @@ namespace NetworkClient.Data
         int Id { get; }
         string FirstName { get; }
         string LastName { get; }
+        string Gender { get; }
+        DateTime Birthday { get; }
 
         void ChangeMultipleValues(IPersonUpdater updater);
     }

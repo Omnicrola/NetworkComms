@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:networking="clr-namespace:NetworkClient.Networking"
         xmlns:ui="clr-namespace:NetworkClient.Ui"
+        xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance ui:MainWindowViewModel}"
         Title="Client" Height="350" Width="525">
@@ -18,10 +19,28 @@
         </Grid.ColumnDefinitions>
 
         <ui:SelectedUserPanel Margin="10" 
-                              SelectedPerson="{Binding ElementName=PeopleTable, Path=SelectedPerson}"/>
-        <ui:PeopleTable Grid.Row="1" 
-                        Margin="10" 
-                        x:Name="PeopleTable" 
+                              SelectedPerson="{Binding ElementName=AllPeopleTable, Path=SelectedPerson}"/>
+
+
+        <dragablz:TabablzControl Grid.Row="1" Margin="8">
+            <dragablz:TabablzControl.InterTabController>
+                <dragablz:InterTabController />
+            </dragablz:TabablzControl.InterTabController>
+            <TabItem Header="All" IsSelected="True">
+                <ui:PeopleTable 
+                        x:Name="AllPeopleTable" 
                         PeopleSource="{Binding People}" />
+            </TabItem>
+            <TabItem Header="Male">
+                <ui:PeopleTable 
+                        x:Name="MalePeopleTable" 
+                        PeopleSource="{Binding People}" />
+            </TabItem>
+            <TabItem Header="Female">
+                <ui:PeopleTable 
+                        x:Name="FemalePeopleTable" 
+                        PeopleSource="{Binding People}" />
+            </TabItem>
+        </dragablz:TabablzControl>
     </Grid>
 </Window>

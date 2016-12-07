@@ -11,6 +11,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100" />
@@ -18,7 +20,14 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="5">First Name:</TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding SelectedPerson.FirstName}"/>
+
         <TextBlock Grid.Row="1" Grid.Column="0" Margin="5">Last Name:</TextBlock>
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding SelectedPerson.LastName}"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Margin="5">Gender:</TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding SelectedPerson.Gender}"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Margin="5">Birthday:</TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding SelectedPerson.Birthday}"/>
     </Grid>
 </UserControl>

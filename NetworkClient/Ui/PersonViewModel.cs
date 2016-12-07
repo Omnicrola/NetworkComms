@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using NetworkClient.Annotations;
 using NetworkClient.Data;
@@ -11,6 +12,8 @@ namespace NetworkClient.Ui
 
         public string FirstName => Person.FirstName;
         public string LastName => Person.LastName;
+        public string Gender => Person.Gender;
+        public DateTime Birthday => Person.Birthday;
 
         public PersonViewModel(IPerson person)
         {

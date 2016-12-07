@@ -16,9 +16,38 @@ namespace NetworkServer
         static void Main(string[] args)
         {
             var dataStorage = new DataStorage();
-            dataStorage.Save(new PersonDto { Id = 1, FirstName = "John", LastName = "Doe" });
-            dataStorage.Save(new PersonDto { Id = 2, FirstName = "Bob", LastName = "Vila" });
-            dataStorage.Save(new PersonDto { Id = 3, FirstName = "John", LastName = "Dillinger" });
+            dataStorage.Save(new PersonDto
+            {
+                Id = 1,
+                FirstName = "Dolores",
+                LastName = "Abernathy",
+                Gender = "Female",
+                Birthday = new DateTime(2086, 2, 5)
+            });
+            dataStorage.Save(new PersonDto
+            {
+                Id = 2,
+                FirstName = "Robert",
+                LastName = "Ford",
+                Gender = "Male",
+                Birthday = new DateTime(2058, 6, 23)
+            });
+            dataStorage.Save(new PersonDto
+            {
+                Id = 3,
+                FirstName = "Maeve",
+                LastName = "Millay",
+                Gender = "Female",
+                Birthday = new DateTime(2069, 3, 28)
+            });
+            dataStorage.Save(new PersonDto
+            {
+                Id = 4,
+                FirstName = "Bernard",
+                LastName = "Lowe",
+                Gender = "Male",
+                Birthday = new DateTime(2068, 2, 15)
+            });
             var messageHandler = new MessageHandler(dataStorage);
 
 

@@ -34,7 +34,9 @@ namespace NetworkClient.Data
                 {
                     Id = updatedPerson.Id,
                     FirstName = updatedPerson.FirstName,
-                    LastName = updatedPerson.LastName
+                    LastName = updatedPerson.LastName,
+                    Gender = updatedPerson.Gender,
+                    Birthday = updatedPerson.Birthday
                 };
                 _writeablePeople.Add(newPerson);
                 _people.Add(newPerson);
