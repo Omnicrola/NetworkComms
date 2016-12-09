@@ -4,42 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="clr-namespace:NetworkClient.Ui"
+        xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
         xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance ui:MainWindowViewModel}"
         Title="Client" Height="350" Width="525">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="2*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-
-        <ui:SelectedUserPanel Margin="10" 
-                              SelectedPerson="{Binding ElementName=AllPeopleTable, Path=SelectedPerson}"/>
-
-
-        <dragablz:TabablzControl Grid.Row="1" Margin="8">
-            <dragablz:TabablzControl.InterTabController>
-                <dragablz:InterTabController InterTabClient="{Binding InterTabClient}"/>
+    <Window.Resources>
+        <system:String x:Key="Partition">Networking and Tabs</system:String>
+    </Window.Resources>
+    <dockablz:Layout Partition="{StaticResource Partition}">
+        <dragablz:TabablzControl Grid.Row="1" Margin="3" ConsolidateOrphanedItems="True">
+            <dragablz:TabablzControl.InterTabController >
+                <dragablz:InterTabController InterTabClient="{Binding InterTabClient}" />
             </dragablz:TabablzControl.InterTabController>
+
             <TabItem Header="All" IsSelected="True">
-                <ui:PeopleTable 
-                        x:Name="AllPeopleTable" 
-                        PeopleSource="{Binding People}" />
+                <ui:SelectedUserPanel Margin="10"
+                                      SelectedPerson="{Binding ElementName=AllPeopleTable, Path=SelectedPerson}" />
+            </TabItem>
+            <TabItem Header="Details" IsSelected="True">
+                <ui:PeopleTable
+                    x:Name="AllPeopleTable"
+                    PeopleSource="{Binding People}" />
             </TabItem>
             <TabItem Header="Male">
-                <ui:PeopleTable 
-                        x:Name="MalePeopleTable" 
-                        PeopleSource="{Binding People}" />
+                <ui:PeopleTable
+                    x:Name="MalePeopleTable"
+                    PeopleSource="{Binding People}" />
             </TabItem>
             <TabItem Header="Female">
-                <ui:PeopleTable 
-                        x:Name="FemalePeopleTable" 
-                        PeopleSource="{Binding People}" />
+                <ui:PeopleTable
+                    x:Name="FemalePeopleTable"
+                    PeopleSource="{Binding People}" />
             </TabItem>
         </dragablz:TabablzControl>
-    </Grid>
+    </dockablz:Layout>
 </Window>

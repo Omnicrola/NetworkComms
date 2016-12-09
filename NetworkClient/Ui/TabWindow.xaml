@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:NetworkClient.Ui"
         xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
         mc:Ignorable="d"
+        WindowStyle="None"
+        Background="Transparent"
         Title="TabWindow" Height="300" Width="300">
-    <Grid>
+    <Grid Background="Transparent">
         <dragablz:TabablzControl Name="TabablzControl"/>
     </Grid>
 </Window>
