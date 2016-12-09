@@ -8,20 +8,20 @@ namespace NetworkClient.Networking
 {
     public class PeopleNetworkMessenger : INetworkMessenger<PersonDto>
     {
-        private readonly NetworkConfiguration _networkConfiguration;
+        private readonly NetworkWrapper _networkWrapper;
         private readonly UiDispatcher _uiDispatcher;
 
         public event EventHandler<MessageReceivedEventArgs<PersonDto>> DataReceived;
 
-        public PeopleNetworkMessenger(NetworkConfiguration networkConfiguration, UiDispatcher uiDispatcher)
+        public PeopleNetworkMessenger(NetworkWrapper networkWrapper, UiDispatcher uiDispatcher)
         {
-            _networkConfiguration = networkConfiguration;
+            _networkWrapper = networkWrapper;
             _uiDispatcher = uiDispatcher;
-            NetworkComms.AppendGlobalIncomingPacketHandler<StorePersonMessage>(typeof(StorePersonMessage).Name,
-                IncomingMessageHandler);
-            NetworkComms.AppendGlobalIncomingPacketHandler<AllPeopleMessage>(typeof(AllPeopleMessage).Name,
-                HandleAllPeople);
-            _networkConfiguration.SendObject(new AllPeopleMessage());
+
+            _networkWrapper.RegisterHandler<StorePersonMessage>(IncomingMessageHandler);
+            _networkWrapper.RegisterHandler<AllPeopleMessage>(HandleAllPeople);
+
+            _networkWrapper.SendObject(new AllPeopleMessage());
         }
 
         private void HandleAllPeople(PacketHeader packetheader, Connection connection, AllPeopleMessage incomingobject)
@@ -51,7 +51,7 @@ namespace NetworkClient.Networking
 
         public void Update(PersonDto data)
         {
-            _networkConfiguration.SendObject(new StorePersonMessage(data));
+            _networkWrapper.SendObject(new StorePersonMessage(data));
         }
     }
 }

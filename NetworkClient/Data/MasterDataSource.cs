@@ -21,7 +21,7 @@ namespace NetworkClient.Data
 
         private MasterDataSource()
         {
-            var networkConfiguration = new NetworkConfiguration();
+            var networkConfiguration = new NetworkWrapper();
             var uiDispatcher = new UiDispatcher();
             var peopleNetworkMessenger = new PeopleNetworkMessenger(networkConfiguration, uiDispatcher);
             PeopleDataSource = new PeopleDataSource(peopleNetworkMessenger);

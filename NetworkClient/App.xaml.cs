@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using NetworkClient.Data;
+using NetworkClient.Ui;
 
 namespace NetworkClient
 {
@@ -13,5 +15,11 @@ namespace NetworkClient
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            var mainWindow = new MainWindow(MasterDataSource.Instance().PeopleDataSource);
+            mainWindow.Show();
+        }
     }
 }

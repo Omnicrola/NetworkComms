@@ -2,6 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Windows;
+using Dragablz;
 using NetworkClient.Data;
 
 namespace NetworkClient.Ui
@@ -12,10 +14,10 @@ namespace NetworkClient.Ui
         public PersonViewModel CurrentlySelectedPerson { get; set; }
         public SimpleInterTabClient InterTabClient { get; set; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(DataSource<IPerson> peopleDataSource)
         {
             People = new ObservableCollection<PersonViewModel>();
-            MasterDataSource.Instance().PeopleDataSource.Data.DataChanged += HandlePeopleChanged;
+            peopleDataSource.Data.DataChanged += HandlePeopleChanged;
             InterTabClient = new SimpleInterTabClient();
         }
 
@@ -40,6 +42,20 @@ namespace NetworkClient.Ui
                     }
                 }
             }
+        }
+    }
+
+    public class SimpleInterTabClient : IInterTabClient
+    {
+        public INewTabHost<Window> GetNewHost(IInterTabClient interTabClient, object partition, TabablzControl source)
+        {
+            var tabWindow = new TabWindow();
+            return new NewTabHost<Window>(tabWindow, tabWindow.TabablzControl);
+        }
+
+        public TabEmptiedResponse TabEmptiedHandler(TabablzControl tabControl, Window window)
+        {
+            throw new NotImplementedException();
         }
     }
 }

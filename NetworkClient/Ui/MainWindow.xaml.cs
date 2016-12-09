@@ -8,10 +8,10 @@ namespace NetworkClient.Ui
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(DataSource<IPerson> peopleDataSource)
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowViewModel(peopleDataSource);
         }
     }
 }
